@@ -6,9 +6,12 @@ const expressLayout = require('express-ejs-layouts');
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('layout');
 })
-//TODO start Lecture no 3
+//TODO start Lecture no 4
+
+//Assets
+app.use(express.static('public'));
 
 // Set Templates
 app.use(expressLayout);
