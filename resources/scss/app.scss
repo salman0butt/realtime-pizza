@@ -1,6 +1,6 @@
 @import './variables';
-//@import '~noty/src/noty.scss';
-//@import '~noty/src/themes/mint.scss';
+@import '~noty/src/noty.scss';
+@import '~noty/src/themes/mint.scss';
 
 body {
     font-family: 'Lato', sans-serif;
@@ -138,14 +138,14 @@ section.status {
 }
 // Line
 .status-box ul li:before {
-   content: '';
-   position: absolute;
-   top: 0;
-   left: -6px;
-   width: 2px;
-   height: 100%;
-   background: $dark;
-   margin-top: 10px;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -6px;
+    width: 2px;
+    height: 100%;
+    background: $dark;
+    margin-top: 10px;
 }
 // Last dot
 .status-box ul li:nth-child(5) span:after {
@@ -187,9 +187,9 @@ section.status {
         max-width: 90%;
     }
     table {
-       display: block;
-       overflow-x: auto;
-       white-space: nowrap;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 }
 
@@ -213,16 +213,16 @@ section.status {
     box-shadow: 0 1px 3px 0 #e6ebf1;
     -webkit-transition: box-shadow 150ms ease;
     transition: box-shadow 150ms ease;
-  }
+}
 
-  .StripeElement--focus {
+.StripeElement--focus {
     box-shadow: 0 1px 3px 0 #cfd7df;
-  }
+}
 
-  .StripeElement--invalid {
+.StripeElement--invalid {
     border-color: #fa755a;
-  }
+}
 
-  .StripeElement--webkit-autofill {
+.StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
-  }
+}
