@@ -1,14 +1,14 @@
 const Order = require('../../../models/order');
 const moment = require('moment');
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 function OrderController() {
     return {
         store(req, res) {
             //validate request
-            const {phone, address} = req.body;
+            const {phone, address, stripeToken, paymentType} = req.body;
             if (!phone || !address) {
-                req.flash('error', 'All fields are required');
-                return res.redirect('/cart');
+                return res.status(422).json({'message': 'All fields are required'});
             }
 
             const order = new Order({
@@ -18,13 +18,20 @@ function OrderController() {
                 address
             });
             order.save().then((result) => {
-                Order.populate(result, { path: 'customerId' }, (err, placedOrder) => {
-                    req.flash('success', 'Order placed successfully');
+                Order.populate(result, {path: 'customerId'}, (err, placedOrder) => {
+                    // req.flash('success', 'Order placed successfully');
+
+                    //Strip payment
+                    if (paymentType === 'card') {
+
+                    }
+
                     // Emit
                     const eventEmitter = req.app.get('eventEmitter');
                     eventEmitter.emit('orderPlaced', placedOrder);
                     delete req.session.cart;
-                    return res.redirect('/customer/orders');
+                    return res.json({'message': 'Order placed successfully'});
+                    // return res.redirect('/customer/orders');
                 });
             }).catch((err) => {
                 req.flash('error', 'Something went wrong.');
@@ -40,7 +47,7 @@ function OrderController() {
             const order = await Order.findById(req.params.id);
             // Authorize User
             if (req.user._id.toString() === order.customerId.toString()) {
-                return res.render('customers/singleOrder', { order });
+                return res.render('customers/singleOrder', {order});
             }
             return res.redirect('/');
         }

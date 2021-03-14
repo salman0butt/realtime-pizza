@@ -22,7 +22,7 @@ connection.once('open', () => {
     console.log('Connection Failed..');
 });
 
-//TODO start Lecture no 9 1:50
+//TODO start Lecture no 12 start from 30 minutes
 
 // Session store
 let mongoStore = new MongoDbStore({
